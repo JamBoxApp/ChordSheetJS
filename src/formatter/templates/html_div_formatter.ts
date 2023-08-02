@@ -35,15 +35,15 @@ export default (
   ${ when(subtitle, () => `<h2>${ subtitle }</h2>`) }
   
   <div class="chord-sheet">
-    ${ each(bodyParagraphs, (paragraph) => `
-      <div class="${ paragraphClasses(paragraph) }">
-        ${ each(paragraph.lines, (line) => `
+    ${ each(bodyParagraphs, (paragraph, paragraphIndex) => `
+      <div id="PARAGRAPH${ paragraphIndex }" class="${ paragraphClasses(paragraph) }">
+        ${ each(paragraph.lines, (line, lineIndex) => `
           ${ when(renderBlankLines || lineHasContents(line), () => `
-            <div class="${ lineClasses(line) }">
-              ${ each(line.items, (item) => `
+            <div id="PARAGRAPH${ paragraphIndex }LINE${ lineIndex }" class="${ lineClasses(line) }">
+              ${ each(line.items, (item, itemIndex) => `
                 ${ when(isChordLyricsPair(item), () => `
-                  <div class="column">
-                    <div class="chord"${ fontStyleTag(line.chordFont) }>${ 
+                  <div id="PARAGRAPH${ paragraphIndex }LINE${ lineIndex }ITEM${ itemIndex }" class="column">
+                    <div class="chord"${ fontStyleTag(line.chordFont) }>${
                       renderChord(
                         item.chords, 
                         line, 
